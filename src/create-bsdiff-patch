@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function abort {
     echo $1
@@ -36,8 +36,8 @@ fi
 
 # check if the md5 hash of the original rom is correct
 echo "Verifying md5 hash of \"${original_rom_filename}\"..."
-original_rom_md5=`md5 -q "${original_rom_path}"`
-required_md5=`grep md5 "${sourcefile}" | cut -d " " -f 3`
+original_rom_md5=$(md5 -q "${original_rom_path}")
+required_md5=$(grep md5 "${sourcefile}" | cut -d " " -f 3)
 
 if [[ $original_rom_md5 != $required_md5 ]]; then
     abort "ROM in original-roms directory has md5 hash ${original_rom_md5}. Require ${required_md5}. Aborting..."
@@ -73,7 +73,7 @@ fi
 echo "Assembling patched ROM..."
 wla-gb -o "patched.o" "${sourcefile}"
 
-if [ $? -ne 0 ]; then
+if [[ $? -ne 0 ]]; then
     rm "${original_rom_filename}"
     abort "Error occurred assembling patched ROM."
 fi
@@ -88,7 +88,7 @@ EOL
 echo "Linking patched ROM..."
 wlalink linkfile "patched.gb"
 
-if [ $? -ne 0 ]; then
+if [[ $? -ne 0 ]]; then
     rm patched.o
     rm linkfile
     rm "${original_rom_filename}"
