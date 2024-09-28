@@ -43,7 +43,13 @@ else
     echo "ROM found in original-roms directory"
 fi
 
-original_rom_md5=$(md5 -q "${original_rom_path}")
+if [[ "$(command -v md5sum)" == *"md5sum" ]]; then
+    MD5=md5sum
+else
+    MD5=md5
+fi
+
+original_rom_md5=$($MD5 "${original_rom_path}" | cut -d " " -f 1)
 echo "MD5 hash is ${original_rom_md5}"
 
 rom_banks=$(($(du -k "${original_rom_path}" | cut -f 1) / 16))
