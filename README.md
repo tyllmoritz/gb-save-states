@@ -15,11 +15,15 @@ Patches to add save state support to Game Boy and Game Boy Color games when play
    - Windows (command line) - [BsPatch](https://www.romhacking.net/utilities/929/)
    - macOS (GUI) - [Multi Patch](http://projects.sappharad.com/tools/multipatch.html)
    - macOS (terminal) - install [Homebrew](https://brew.sh/) and then run ```brew install bsdiff``` in the terminal
+- Patching software that supports bps patches:
 
+   - Windows (GUI+command line) - [Flips](https://github.com/Alcaro/Flips)
+   - Website (GUI) - [RomPatcher.js](https://www.marcrobledo.com/RomPatcher.js)
+   - macOS (GUI) - [Multi Patch](http://projects.sappharad.com/tools/multipatch.html)
 
 ## Setup
  
-1. Download the .bsdiff patch file for the game from the [patches](patches) directory
+1. Download the .bsdiff or .bps patch file for the game from the [patches](patches) directory
 
 
 2. Patch your original ROM with the patch to build a new patched ROM. 
@@ -27,8 +31,12 @@ Patches to add save state support to Game Boy and Game Boy Color games when play
    Example for command line/terminal:
 
    ```
-   bspatch "B.C. Kid (E) [!].gb" patched.gb "B.C. Kid (E) [!].gb.bsdiff"
+   mkdir -p patched-roms
+   bspatch "original-roms/B.C. Kid (E) [!].gb" "patched-roms/B.C. Kid (E) [!].gb" "patches/B.C. Kid (E) [!].gb.bsdiff"
    ```
+   ```
+   mkdir -p patched-roms
+   flips --apply "patches/B.C. Kid (E) [!].gb.bsdiff" "original-roms/B.C. Kid (E) [!].gb" "patched-roms/B.C. Kid (E) [!].gb"
 
 3. Copy the patched ROM to your flash cartridge
 
